@@ -349,6 +349,22 @@ $esercizi_audio = array (
 
 
 if($text == "/start"){
+	$response = $start['1']['testo_A'].$firstname."!".$start['1']['testo_B'];
+	//menu
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => 'HTML');
+	$parameters["method"] = "sendMessage";
+	$parameters["reply_markup"] = '{ "keyboard": [["Teoria"], ["Esercizi sugli intervalli"]]}';
+	echo json_encode($parameters);
+	//send Audio
+	$botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendAudio";
+	$postFields = array('chat_id' => $chatId, 'audio' => new CURLFile(realpath("./aud/sirena_carabinieri.mp3")), 'title' => "Sirena bitonale dei carabinieri", 'disable_notification' => "true");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	$output = curl_exec($ch);
 }
 
 
