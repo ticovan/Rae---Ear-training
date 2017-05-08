@@ -1,6 +1,6 @@
 <?php
 // insert here your Bot API token
-define("BOT_TOKEN", "360080898:AAG7UklJPYTI1N075FFlSaw8NYJaV_Hl9OM");
+define("BOT_TOKEN", "");
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 if(!$update)
